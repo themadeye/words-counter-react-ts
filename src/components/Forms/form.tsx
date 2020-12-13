@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import {Button, FormControl, FormLabel} from 'react-bootstrap';
 
 interface IState {
   currentContent: string;
@@ -91,18 +92,21 @@ export class Form extends React.Component<{}, IState>{
       <div>
         <h1>Words counter in React with Typescript</h1>
         <form>
-          <textarea 
+          <FormControl as="textarea"
+            rows={3}
             placeholder="Add some text here" 
             value={this.state.currentContent}
             onChange={(e) => this.setState({ currentContent: e.target.value})}
           />
-          <button type="submit" onClick={(e) => this.handleCount(e)}>Count Words</button>
-          <button type="submit" onClick={(e) => this.handleSortAlpha(e)}>Sort Alphabetically</button>
-          <button type="submit" onClick={(e) => this.handleSortNumeric(e)}>Sort By Occurences</button>
+          <Button style={{ margin: 30 }} type="submit" onClick={(e) => this.handleCount(e)}>Count Words</Button>
+          <Button style={{ margin: 30 }} type="submit" onClick={(e) => this.handleSortAlpha(e)}>Sort Alphabetically</Button>
+          <Button style={{ margin: 30 }} type="submit" onClick={(e) => this.handleSortNumeric(e)}>Sort By Occurences</Button>
         </form>
         {Object.entries(this.state.count).map((key, ind)=> {
           return(
-            <h3>Word: {key[0]} | Occurences: {key[1]}</h3>
+            <Fragment>
+              <FormLabel>Word: {key[0]} | Occurences: {key[1]}</FormLabel><br />
+            </Fragment>
           ) 
         })}
       </div>
